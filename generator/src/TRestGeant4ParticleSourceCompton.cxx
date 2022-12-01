@@ -11,16 +11,45 @@ double TRestGeant4ParticleSourceCompton::electron_mass_c2 = 510.998910;
 
 void TRestGeant4ParticleSourceCompton::PrintParticleSource() {
     RESTMetadata << "---------------------------------------" << RESTendl;
-    RESTMetadata << "Particle Source Name: Compton Scattering (Simple)" << RESTendl;
-    RESTMetadata << "Energy: " << GetEnergy() << " keV" << RESTendl;
+    RESTMetadata << "Section Name:" << GetSectionName() << RESTendl;
+    RESTMetadata << "Particle Source:" << GetName() << RESTendl;
+    RESTMetadata << "Cross section type: " << CrossSectionTypeToString(fCrossSectionType) << RESTendl;
+    RESTMetadata << "Energy distribution type: " << EnergyDistributionTypesToString(fEnergyDistType)
+                 << RESTendl;
+    if (GetEnergyDistributionRangeMin() == GetEnergyDistributionRangeMax()) {
+        RESTMetadata << "Energy distribution energy: " << GetEnergy() << " keV" << RESTendl;
+    } else {
+        RESTMetadata << "Energy distribution range (keV): (" << GetEnergyDistributionRangeMin() << ", "
+                     << GetEnergyDistributionRangeMax() << ")" << RESTendl;
+    }
+    switch (fEnergyDistType) {
+        case EnergyDistributionTypes::TH1D: {
+            RESTMetadata << "Energy distribution filename: "
+                         << TRestTools::GetPureFileName((string)GetEnergyDistributionFilename()) << RESTendl;
+            RESTMetadata << "Energy distribution histogram name: " << GetEnergyDistributionNameInFile()
+                         << RESTendl;
+            break;
+        }
+        case EnergyDistributionTypes::FORMULA: {
+            RESTMetadata << "Energy distribution random sampling grid size: "
+                         << GetEnergyDistributionFormulaNPoints() << RESTendl;
+            break;
+        }
+    }
+    RESTMetadata << "Angular distribution type: " << AngularDistributionTypesToString(fAngularDistType)
+                 << RESTendl;
+    switch (fAngularDistType) {
+        case AngularDistributionTypes::FLUX: {
+            RESTMetadata << "Angular distribution direction: (" << GetDirection().X() << ","
+                         << GetDirection().Y() << "," << GetDirection().Z() << ")" << RESTendl;
+            break;
+        }
+    }
 }
 
 // Use existing parameters defined in TRestGeant4ParticleSource as much as possible
 // Newly defined parameter: cross-section
 void TRestGeant4ParticleSourceCompton::InitFromConfigFile() {
-    //
-    fDirection = fDirection.Unit();
-
     // Cross section
     fCrossSectionType = StringToCrossSectionType(GetParameter("cross-section"));
 
@@ -221,7 +250,7 @@ double TRestGeant4ParticleSourceCompton::SampleEnergy() {
 TVector3 TRestGeant4ParticleSourceCompton::SampleDirection() {
     switch (fAngularDistType) {
         case AngularDistributionTypes::FLUX:
-            return fDirection;
+            return fDirection.Unit();
         case AngularDistributionTypes::ISOTROPIC:
             return GetIsotropicVector();
         default:
