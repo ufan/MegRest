@@ -144,5 +144,25 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/data/
   COMPONENT install
 )
 
+# install pcm files
+if (CMAKE_SYSTEM_NAME MATCHES "Windows") # we must call library install here in windows
+    # Copy pcm files to bin
+    install(CODE
+            "
+    file(GLOB PCMFiles \"\${CMAKE_BINARY_SOURCE_DIR}/rootdict/*.pcm\")
+    file(COPY \${PCMFiles} DESTINATION \${CMAKE_INSTALL_PREFIX}/bin)
+    "
+            )
+
+else ()
+    # Copy pcm files to lib
+    install(CODE
+            "
+    file(GLOB PCMFiles \"\${CMAKE_CURRENT_BINARY_DIR}/rootdict/*.pcm\")
+    file(COPY \${PCMFiles} DESTINATION \${CMAKE_INSTALL_PREFIX}/lib)
+    "
+            )
+endif ()
+
 message(STATUS "include directories: ${external_include_dirs}")
 message(STATUS "libraries: ${external_libs}")
