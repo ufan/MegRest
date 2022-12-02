@@ -1,0 +1,6 @@
+
+* Version management
+** independent versioning in forked repos (adding one more number .x ??)
+** manually add min compatible version in cmakelist.txt for each framework component
+** check the version in build time
+** record the version in run time
