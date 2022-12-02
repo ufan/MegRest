@@ -1,9 +1,10 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 
+# version number
+set(LibraryVersion "0.1" )
+
 PROJECT(MegRest)
 
-# version number
-set( LibraryVersion "0.1" )
 add_definitions(-DLIBRARY_VERSION="${LibraryVersion}")
 
 # Minimum compiler version
