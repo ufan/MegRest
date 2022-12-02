@@ -2,6 +2,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 
 # Generate compile_commands.json by default (useful for some IDE)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
+# Put local headers before external headers
+set(CMAKE_INCLUDE_DIRECTORIES_BEFORE ON CACHE INTERNAL "")
 
 # version number
 set(LibraryVersion "0.1" )
