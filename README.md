@@ -1,13 +1,4 @@
 # MegRest
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-
-    - [Installation](#installation)
-        - [Prerequisite](#prerequisite)
-        - [REST framework](#rest-framework)
-        - [MegRest](#megrest-1)
-
-<!-- markdown-toc end -->
-
 ## Installation
 The intallation guide is targeted at Ubuntu 20.04/22.04 LTS on x86 arch
 
@@ -130,7 +121,7 @@ this branch into one.
 # checkout the branch you wanna merge into
 git checkout main 
 # squash all commits into the changes
-git merge --squash 
+git merge --squash cool-feature
 # commit these changes and provide meaningful log message for this final commit
 git commit -a
 ```
@@ -149,6 +140,8 @@ git rebase -i main
 A text terminal will show up, just follow the guides there.
 You can shrink your many small trivial commits into several meaningful commits using this method.
 Also, the commit message can be edited.
+
+The other pro using this method is that you can keep _cool-feature_ branch for later developping.
 
 #### 5 create and submit the pull request
 Use GitHub website interface to create and submit the pull requset.
