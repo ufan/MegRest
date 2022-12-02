@@ -1,4 +1,14 @@
 # MegRest
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+
+- [MegRest](#megrest)
+    - [Installation](#installation)
+        - [Prerequisite](#prerequisite)
+        - [REST framework](#rest-framework)
+        - [MegRest](#megrest-1)
+
+<!-- markdown-toc end -->
+
 ## Installation
 The intallation guide is targeted at Ubuntu 20.04/22.04 LTS on x86 arch
 
@@ -6,7 +16,7 @@ The intallation guide is targeted at Ubuntu 20.04/22.04 LTS on x86 arch
 It is basically the ROOT prerequisite, check [this guide](https://root.cern/install/dependencies/).
 
 ### REST framework
-#### Step 1: 
+#### Step 1
 Clone the code.
 ```bash
 # 1. clone and cd to the top directory
