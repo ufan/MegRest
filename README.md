@@ -6,7 +6,8 @@ The intallation guide is targeted at Ubuntu 20.04/22.04 LTS on x86 arch
 It is basically the ROOT prerequisite, check [this guide](https://root.cern/install/dependencies/).
 
 ### REST framework
-Step 1: clone the code
+#### Step 1: 
+Clone the code.
 ```bash
 # 1. clone and cd to the top directory
 git clone https://github.com/MegMev/rest-framework && cd rest-framework
@@ -18,8 +19,9 @@ git checkout develop
 python3 pull-submodules.py --clean --dontask
 ```
 
-Step 2: install ROOT, Geant4 and Garfield using provided scripts.
-If you already have these packages installed, make sure they have current version (ROOT > 6.24, Geant4 > 11.0) and go to Step 3 directly.
+#### Step 2
+Install ROOT, Geant4 and Garfield using provided scripts.
+If you already have these packages installed, make sure they have current version (ROOT > 6.24, Geant4 > 11.0) and go to [Step 3](#step-3) directly.
 ```bash
 cd scripts/installation
 # 1. install ROOT first
@@ -35,9 +37,9 @@ source ~/.bashrc
 These scripts will install the packages under `$HOME/app` and append some commands into your `.bashrc` or `.zshrc` to
 set up the running environment automatically.
 
-Step 3: build
+#### Step 3
+Build and install the framework.
 Make sure the running environment of ROOT, Geant4 and Garfield has been configured.
-
 ```bash
 # go back to the top dircetory of code tree
 cd $YOUR_REST_REPO
