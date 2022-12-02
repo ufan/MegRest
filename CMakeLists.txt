@@ -1,11 +1,13 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 
+# Generate compile_commands.json by default (useful for some IDE)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
+
 # version number
 set(LibraryVersion "0.1" )
-
-PROJECT(MegRest)
-
 add_definitions(-DLIBRARY_VERSION="${LibraryVersion}")
+
+PROJECT(MegRest VERSION ${LibraryVersion})
 
 # Minimum compiler version
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -165,5 +167,4 @@ else ()
             )
 endif ()
 
-message(STATUS "include directories: ${external_include_dirs}")
-message(STATUS "libraries: ${external_libs}")
+message(STATUS "version: ${PROJECT_VERSION}")
