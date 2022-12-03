@@ -11,12 +11,17 @@ Clone the code.
 ```bash
 # 1. clone and cd to the top directory
 git clone https://github.com/MegMev/rest-framework && cd rest-framework
+
 # 2. cd to the code tree
 cd rest-framework
+
 # 3. checkout the develop branch
 git checkout develop
+
 # 4. pull the submodules
 python3 pull-submodules.py --clean --dontask
+# or
+git submodule update --init
 ```
 
 #### Step 2
@@ -27,9 +32,11 @@ cd scripts/installation
 # 1. install ROOT first
 ./intallROOT.sh
 source ~/.bashrc
+
 # 2. install Geant4
 ./installGeant4.sh
 source ~/.bashrc
+
 # 3. install Garfield
 ./installGarfield.sh
 source ~/.bashrc
@@ -43,10 +50,13 @@ Make sure the running environment of ROOT, Geant4 and Garfield has been configur
 ```bash
 # go back to the top dircetory of code tree
 cd $YOUR_REST_REPO
+
 # 1. make a build directory and cd to it
 mkdir build && cd build
+
 # 2. generate Makefile
 cmake -DCMAKE_INSTALL_PREFIX=$YOUR_INSTALL_DIR ..
+
 # 3. build and install
 make -j 6 install
 ```
@@ -55,8 +65,10 @@ make -j 6 install
 ```bash
 # 1. clone and cd to the top directory
 git clone https://github.com/MegMev/MegRest && cd MegRest
+
 # 2. make a build directory and cd to it
 mkdir build && cd build
+
 # 3. build and install
 make -j 6 install
 ```
@@ -102,8 +114,10 @@ For example, 'cool-feature' is the name of the new branch
 ```
 # make sure the code is updated
 git switch main && git pull
+
 # then, create the branch based on main branch
 git checkout -b cool-feature
+
 # setup its push remote to pravite/cool-feature
 git push -u private cool-feature
 ```
@@ -139,6 +153,7 @@ It's important to sync with these latest updates to make sure your modification 
 ```
 # sync with upstream repo
 git switch main && git pull
+
 # rebase your work upon there new development
 git switch cool-feature && git rebase origin/main
 ```
@@ -155,6 +170,7 @@ To have a clear and meaningful development history, it's required to clean your 
 ```
 # switch to the branch you wanna create the pull request from
 git switch cool-feature
+
 # rebase onto main branch again, but this time interactiveli
 git rebase -i main
 ```
@@ -163,7 +179,7 @@ Interactive rebase allows you to squash many trivial commits into several meanin
 Basically, you can re-organize the commit history. There are guides on the terminal showing all behaviors available.
 
 _rebase_ is a history modification manueover. After rebase, the local branch and the remote tracing branch (e.g. _cool-feature_ and _private/cool-feature_)
-may diverge. A force push is needed to keep them coverged (this is mandatory):
+may diverge. A [force push](https://stackoverflow.com/questions/8939977/git-push-rejected-after-feature-branch-rebase) is needed to keep them coverged (this is mandatory):
 ```
 git push --force private cool-feature
 ```
