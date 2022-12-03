@@ -81,71 +81,97 @@ Most development work should be done within the MegRest repository.
 Contribution to the framework code follows the same pattern.
 
 ### MegRest
-The _main_ branch is the target of pull request.
-If you follow the above installation guide, you already have a local repo with a _main_ branch tracing  the project's MegRest _main_ branch.
-Assuming that you have forked the project's MegRest repo, a typical workflow is:
+If you follow the above installation guide, you already have a local repo with a local _main_ branch tracing the project's MegRest (i.e. _orgin/main_)
+Assuming that you have forked the project's MegRest repo, then a typical workflow is:
 
-#### 1. add your personal fork as a new remote in your local clone.
-In this example, 'private' is the new remote's name, and url is your fork's address
+#### 1. Add the forked repo as a new remote in your local clone.
+Assuming 'private' is selected as the name of the remote tracing youraccount's fork of MegRest repo.
 ```
+# cd to the local repo's directory, then:
 git remote add private https://github.com/youraccount/MegRest
 ```
-#### 2. add a new branch to record your developments
-```
-git checkout -b cool-feature private/main
-```
 
-#### 3. You may make multiple commits to deveplop this cool feature
+Now there are two remotes in your local repo:
+- _origin_ : pointing to the project's MegRest repo (i.e. https://github.com/megmev/megRest/)
+- _private_ : pointing to youraccount's MegRest repo (i.e. https://github.com/youraccount/MegRest)
+
+_origin_ is used to keep updated with latest developments from others and _private_ is used to keep your own development before pull request.
+
+#### 2. Create a new branch to record your developments
+For example, 'cool-feature' is the name of the new branch
+```
+# make sure the code is updated
+git switch main && git pull
+# then, create the branch based on main branch
+git checkout -b cool-feature
+# setup its push remote to pravite/cool-feature
+git push -u private cool-feature
+```
+NOTE: You may also create the new branch based on _private/main_. In this case, an extra step is needed to synchronize _private/main_ with _origin/main_
+either through GitHub's website interface or in command line. See [this guide](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork).
+
+#### 3. Make changes and keep them as commits
+You are now free to modify the code base as your wish (commit, push, new branch, merge). The following commands may be useful in your development.
 ```
 git commit
 git push
+git checkout -b sub-cool-feature cool-feature
+git switch cool-feature
+git merge sub-cool-feature
+git log
+git diff
+git restore
 ```
 
-#### 4. prepare the pull requset
+Keep in mind that all the local modificatioins should be pushed to _private_, not _origin_.
+The _origin_ repo is configured to accept pull requst from normal developpers.
+Only developpers who have been granted the privilege can push directly to _origin_, normally these developpers are the administrators of the repo.
 
+#### 4. Prepare the pull requset
+Ultimately, you are happy with your new feature and ready to publish it.
 Before submitting the pull requst, some preparation is requied.
-##### 4.a pull the latest code and rebase onto it
-```
-git checkout main && git pull
-git checkout cool-feature && git rebase main
-```
-Solve all the conficts during the rebase before proceeding.
+Most importantly, a thorough test should be done in your local machine so that you are confident that the new code functions as expected.
 
-##### 4.b squash the development commits
-To have a clear and meaningful log history, it's required to clean your commit history by squash.
-
-###### method 1: 
-If you don't need your 'cool-feature' branch after your pull request is merged, you can use the following command to squash all commits in
-this branch into one.
+Then, extra clean work is needed:
+##### 4.a Sync with latest updates from other developpers
+At the same time as you develop the cool feature, other developpers are also working and may already publish their work before you.
+It's important to sync with these latest updates to make sure your modification is compatible with them.
 ```
-# checkout the branch you wanna merge into
-git checkout main 
-# squash all commits into the changes
-git merge --squash cool-feature
-# commit these changes and provide meaningful log message for this final commit
-git commit -a
+# sync with upstream repo
+git switch main && git pull
+# rebase your work upon there new development
+git switch cool-feature && git rebase origin/main
 ```
-NOTE: The 'cool-feature' branch is useless after the squash and should be deleted.
-The 'main' branch should be used for the pull request in the next step.
+Most of time, you are working on different parts of the code tree from other developpers, the rebase shall be smooth.
+If not, there may be conflicts.
+Then, solve all these conficts before proceeding.
+You may need to communicate with other developpers to understand their modifications to solve these conflicts.
 
-###### method 2:
-A more suitable and flexible way to re-organize your commit history is interactive rebase:
+##### 4.b Clean development history by squash commits
+It's not unusual to make many small and trivial commits during the development, e.g. backup, quick hot-fix etc.
+These commits are meaningless to other developpers and end-users.
+To have a clear and meaningful development history, it's required to clean your local commit history by squash.
+
 ```
 # switch to the branch you wanna create the pull request from
-git checkout cool-feature
-# rebase onto the branch which is synced with the remote you wanna push your pull request to
+git switch cool-feature
+# rebase onto main branch again, but this time interactiveli
 git rebase -i main
 ```
 
-A text terminal will show up, just follow the guides there.
-You can shrink your many small trivial commits into several meaningful commits using this method.
-Also, the commit message can be edited.
+Interactive rebase allows you to squash many trivial commits into several meaningful commits, modify the log message and much more.
+Basically, you can re-organize the commit history. There are guides on the terminal showing all behaviors available.
 
-The other pro using this method is that you can keep _cool-feature_ branch for later developping.
+_rebase_ is a history modification manueover. After rebase, the local branch and the remote tracing branch (e.g. _cool-feature_ and _private/cool-feature_)
+may diverge. A force push is needed to keep them coverged (this is mandatory):
+```
+git push --force private cool-feature
+```
 
-#### 5 create and submit the pull request
-Use GitHub website interface to create and submit the pull requset.
+#### 5. Create and submit the pull request
+Now, you can create the pull request using GitHub website interface.
+The _main_ branch of the project account's MegRest repo should be selected as the base repo of the pull request.
+The _cool-feature_ branch of youraccount's MegRest repo should be selected as the head repo of the pull request.
 
 ### Framework Core
-
 ### Framework Submodules
