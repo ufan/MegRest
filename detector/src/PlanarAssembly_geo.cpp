@@ -16,6 +16,7 @@
 //==========================================================================
 #include <DD4hep/Handle.h>
 #include <DD4hep/Objects.h>
+#include <DD4hep/Shapes.h>
 #include <DD4hep/Volumes.h>
 #include <DD4hep/detail/SegmentationsInterna.h>
 #include <XML/XML.h>
@@ -34,8 +35,8 @@ using namespace dd4hep;
 using namespace dd4hep::detail;
 
 static Ref_t create_element(Detector& description, xml_h e, Ref_t sens) {
-    typedef pair<Assembly, double> AssemblyPair;
-    // typedef pair<Volume, double> VolumePair;
+    // typedef pair<Assembly, double> AssemblyPair;
+    typedef pair<Volume, double> VolumePair;
 
     xml_det_t x_det(e);
     string det_name = x_det.nameStr();
@@ -50,8 +51,8 @@ static Ref_t create_element(Detector& description, xml_h e, Ref_t sens) {
     int n_sensitive = 0;
 
     /// Set visualization, limits and region (if present)
-    // det_env.setRegion(description, x_det.regionStr());
-    // det_env.setLimitSet(description, x_det.limitsStr());
+    det_env.setRegion(description, x_det.regionStr());
+    det_env.setLimitSet(description, x_det.limitsStr());
     det_env.setVisAttributes(description, x_det.visStr());
 
     /// module loop
@@ -101,7 +102,7 @@ static Ref_t create_element(Detector& description, xml_h e, Ref_t sens) {
         string sec_name = x_sec.nameStr();
         // default layer gap
         double l_gap = x_sec.hasAttr(_U(gap)) ? x_sec.gap() : 0;
-        vector<AssemblyPair> layers;
+        vector<VolumePair> layers;
         Position sec_pos(0, 0, 0);
         RotationZYX sec_rot(0, 0, 0);
         if (x_sec.hasChild(_U(position))) {
@@ -114,7 +115,6 @@ static Ref_t create_element(Detector& description, xml_h e, Ref_t sens) {
         }
 
         /// layer loop
-        // double total_thickness = 0;
         int layer_id = 0;  // initial index
         for (xml_coll_t li(x_sec, _U(layer)); li; ++li) {
             xml_comp_t x_layer = li;
@@ -135,28 +135,30 @@ static Ref_t create_element(Detector& description, xml_h e, Ref_t sens) {
 
             double mod_x = mod_dims[m_name].X();
             double mod_y = mod_dims[m_name].Y();
+            double mod_z = mod_dims[m_name].Z();
             double row_ll = (nrow - 1) * row_gap + nrow * mod_x;
             double col_ll = (ncol - 1) * col_gap + ncol * mod_y;
 
             /// repeat loop
             for (int r_id = 0; r_id < nrepeat; ++r_id, ++layer_id) {
-                Assembly l_env(_toString(layer_id, "layer%d"));
+                Volume l_env(_toString(layer_id, "layer%d"), Box(row_ll, col_ll, mod_z), chamber_gas);
                 l_env.setVisAttributes(description.invisible());
 
-                double row_dd = -row_ll / 2.;
                 double col_dd = -col_ll / 2.;
                 for (int col_id = 0; col_id < ncol; col_id++) {
+                    double row_dd = -row_ll / 2.;
+
+                    Volume row_env(_toString(col_id, "row%d"), Box(row_ll, mod_y, mod_z), chamber_gas);
                     for (int row_id = 0; row_id < nrow; row_id++) {
-                        pv = l_env.placeVolume(modules[m_name],
-                                               Position(row_dd + mod_x / 2, col_dd + mod_y / 2, 0));
-                        pv.addPhysVolID("column", col_id).addPhysVolID("row", row_id);
+                        pv = row_env.placeVolume(modules[m_name], Position(row_dd + mod_x / 2, 0, 0));
+                        pv.addPhysVolID("column", row_id);
                         row_dd += mod_x + row_gap;
                     }
+                    pv = l_env.placeVolume(row_env, Position(0, col_dd + mod_y / 2, 0));
+                    pv.addPhysVolID("row", col_id);
                     col_dd += mod_y + col_gap;
-                    row_dd = -row_ll / 2;
                 }
-                // total_thickness += mod_dims[m_name].Z() + l_gap;
-                layers.emplace_back(l_env, mod_dims[m_name].Z() + l_gap);
+                layers.emplace_back(l_env, mod_z + l_gap);
             }
         }
 
