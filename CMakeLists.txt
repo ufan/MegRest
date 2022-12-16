@@ -130,6 +130,10 @@ link_libraries("-fPIC")
 
 COMPILEDIR(MegRest)
 
+# extra packages based on dd4hep
+option(DD4HEP_BUILD_TEST "Build dd4hep tests" ON)
+add_subdirectory(detector)
+
 # ADD_LIBRARY_TEST()
 
 ### installation ###
@@ -146,6 +150,11 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/examples/
 # )
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/data/
   DESTINATION data/MegRest
+  COMPONENT install
+)
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/geometry/
+  DESTINATION geometry
   COMPONENT install
 )
 
