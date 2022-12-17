@@ -149,7 +149,7 @@ static Ref_t create_element(Detector& description, xml_h e, Ref_t sens) {
                     for (int row_id = 0; row_id < nrow; row_id++) {
                         pv = l_env.placeVolume(modules[m_name],
                                                Position(row_dd + mod_x / 2, col_dd + mod_y / 2, 0));
-                        pv.addPhysVolID("column", col_id).addPhysVolID("row", row_id);
+                        pv.addPhysVolID("row", col_id).addPhysVolID("column", row_id);
                         row_dd += mod_x + row_gap;
                     }
                     col_dd += mod_y + col_gap;
