@@ -2,7 +2,7 @@
 <lccdd>
     <!-- Limits -->
     <limits>
-        <limitset name="Czt_limitSet">
+        <limitset name="Czt_LimitSet">
             <limit name="step_length_max" particles="*" value="5.0" unit="mm" />
             <limit name="track_length_max" particles="*" value="5.0" unit="mm" />
             <limit name="time_max" particles="*" value="5.0" unit="ns" />
@@ -53,7 +53,7 @@
 
 
     <detectors>
-        <detector id="2" name="CztCalorimetor" type="Megat_PlanarAssembly" readout="CztHits" material="TPC_gas"
+        <detector id="2" name="CztCalorimeter" type="Megat_PlanarAssembly" readout="CztHits" material="TPC_gas"
                   region="Czt_Region" limits="Czt_LimitSet">
             <!-- in TPC gas -->
             <material name="TPC_gas" comment="Default fill material"/>

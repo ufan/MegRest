@@ -14,6 +14,7 @@
 // Specialized generic detector constructor
 //
 //==========================================================================
+#include <DD4hep/DetElement.h>
 #include <DD4hep/Handle.h>
 #include <DD4hep/Objects.h>
 #include <DD4hep/Shapes.h>
@@ -141,14 +142,16 @@ static Ref_t create_element(Detector& description, xml_h e, Ref_t sens) {
 
             /// repeat loop
             for (int r_id = 0; r_id < nrepeat; ++r_id, ++layer_id) {
-                Volume l_env(_toString(layer_id, "layer%d"), Box(row_ll, col_ll, mod_z), chamber_gas);
+                Volume l_env(_toString(layer_id, "layer%d"), Box(row_ll / 2, col_ll / 2, mod_z / 2),
+                             chamber_gas);
                 l_env.setVisAttributes(description.invisible());
 
                 double col_dd = -col_ll / 2.;
                 for (int col_id = 0; col_id < ncol; col_id++) {
                     double row_dd = -row_ll / 2.;
 
-                    Volume row_env(_toString(col_id, "row%d"), Box(row_ll, mod_y, mod_z), chamber_gas);
+                    Volume row_env(_toString(col_id, "row%d"), Box(row_ll / 2, mod_y / 2, mod_z / 2),
+                                   chamber_gas);
                     for (int row_id = 0; row_id < nrow; row_id++) {
                         pv = row_env.placeVolume(modules[m_name], Position(row_dd + mod_x / 2, 0, 0));
                         pv.addPhysVolID("column", row_id);
@@ -177,6 +180,8 @@ static Ref_t create_element(Detector& description, xml_h e, Ref_t sens) {
         /// place the section
         pv = det_env.placeVolume(sec_env, Transform3D(sec_rot, sec_pos));
         pv.addPhysVolID("section", x_sec.id());
+        DetElement sec_de(sdet, sec_name, x_sec.id());
+        sec_de.setPlacement(pv);
     }
 
     /// place the detector in mother volume
