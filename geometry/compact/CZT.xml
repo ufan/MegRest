@@ -17,7 +17,7 @@
     <!-- Region  -->
     <regions>
         <region name="Czt_Region" eunit="MeV" lunit="mm" cut="0.001" threshold="0.001">
-            <limitsetref name="Czt_limitSet" />
+            <limitsetref name="Czt_LimitSet" />
         </region>
     </regions>
 
@@ -55,6 +55,8 @@
     <detectors>
         <detector id="2" name="CztCalorimeter" type="Megat_PlanarAssembly" readout="CztHits" material="TPC_gas"
                   region="Czt_Region" limits="Czt_LimitSet">
+            <!-- <detector id="2" name="CztCalorimeter" type="Megat_PlanarAssembly_Plain" readout="CztHits" material="TPC_gas"
+             region="Czt_Region" limits="Czt_LimitSet"> -->
             <!-- in TPC gas -->
             <material name="TPC_gas" comment="Default fill material"/>
 
