@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lccdd>
+    <!-- Limits -->
+    <limits>
+        <limitset name="Czt_LimitSet">
+            <limit name="step_length_max" particles="*" value="5.0" unit="mm" />
+            <limit name="track_length_max" particles="*" value="5.0" unit="mm" />
+            <limit name="time_max" particles="*" value="5.0" unit="ns" />
+            <limit name="ekin_min" particles="*" value="0.01" unit="MeV" />
+            <limit name="range_min" particles="*" value="1.0" unit="mm" />
+            <cut particles="e+" value="2.0" unit="mm" />
+            <cut particles="e-" value="2.0" unit="mm" />
+            <cut particles="gamma" value="5.0" unit="mm" />
+        </limitset>
+    </limits>
+
+    <!-- Region  -->
+    <regions>
+        <region name="Czt_Region" eunit="MeV" lunit="mm" cut="0.001" threshold="0.001">
+            <limitsetref name="Czt_LimitSet" />
+        </region>
+    </regions>
+
+    <!-- Dimensions -->
+    <define>
+        <constant name="Czt_X" value="fiducial_x*2+1*mm" />
+        <constant name="Czt_Y" value="fiducial_y*2+1*mm" />
+        <constant name="Czt_Z" value="fiducial_z*2+1*mm" />
+        <constant name="Czt_Thickness" value="30*mm" />
+    </define>
+
+
+    <detectors>
+        <detector id="2" name="Calorimeter" type="DD4hep_VolumeAssembly" sensitive="calorimeter" readout="CztHits">
+            <envelope name="Calorimeter" material="TPC_gas" type="Assembly" />
+
+            <!-- Open Block -->
+            <shape name="Czt_Solid" type="BooleanShape" operation="Subtraction">
+                <shape type="Box" dx="Czt_X/2+Czt_Thickness" dy="Czt_Y/2+Czt_Thickness" dz="(Czt_Z+Czt_Thickness)/2" />
+                <shape type="Box" dx="Czt_X/2" dy="Czt_Y/2" dz="(Czt_Z+Czt_Thickness)/2" />
+                <position x="0" y="0" z="Czt_Thickness" />
+            </shape>
+
+            <volume name="Czt" shape="Czt_Solid" material="CdZnTe" vis="CztCrystalVis" sensitive="true" />
+            <physvol element="Czt" volume="Czt">
+                <position x="0" y="0" z="-Czt_Thickness/2" />
+            </physvol>
+        </detector>
+    </detectors>
+
+    <!-- Readout/Segmentation/HitCollection Configuration-->
+    <readouts>
+        <readout name="CztHits">
+            <id>system:6</id>
+        </readout>
+    </readouts>
+</lccdd>

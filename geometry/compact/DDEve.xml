@@ -1,0 +1,16 @@
+<ddeve>
+    <display visLevel="7" loadLevel="5" />
+
+    <view name="CZT" type="View3D" structure="true" sensitive="true">
+        <detelement name="CztCalorimeter" load_geo="5" show="5" alpha="0.5" />
+    </view>
+
+    <view name="3D R-Phi (Global)" type="RhoPhiProjection">
+        <detelement name="CztCalorimeter"    load_geo="4" alpha="0.5"/>
+    </view>
+
+    <view name="MultiView" type="MultiView">
+        <detelement name="CztCalorimeter" />
+    </view>
+    <include ref="Megat.xml" />
+</ddeve>

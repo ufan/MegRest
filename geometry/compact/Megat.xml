@@ -24,10 +24,16 @@
 
     <!-- Visual setting -->
     <display>
-        <vis name="VesselVis" alpha="0.6" r="0.7" g="0.7" b="0.7" showDaughters="true" visible="true" />
-        <vis name="SensorVis" alpha="0.0" r="0" g="0.0" b="0.8" showDaughters="true" visible="true" />
-        <vis name="PcbVis" alpha="0.0" r="0" g="0.5" b="0" showDaughters="true" visible="true" />
-        <vis name="TpcVis" alpha="0.0" r="0.7" g="0.0" b="0.5" showDaughters="true" visible="true" />
+        <vis name="VesselVis" alpha="0.0" r="0.83" g="0.84" b="0.86" showDaughters="true" visible="true" />
+
+        <!-- CZT vis -->
+        <vis name="CztCrystalVis" alpha="0.0" r="0.0" g="0.4" b="0.8" showDaughters="true" visible="true" />
+        <vis name="CztPcbVis" alpha="0.9" r="0.18" g="0.8" b="0.44" showDaughters="true" visible="true" />
+
+        <!-- TPC vis -->
+        <vis name="TpcReadoutVis" alpha="0.0" r="1.0" g="0.0" b="0.4" showDaughters="true" visible="true" />
+        <vis name="TpcCageVis" alpha="0.0" r="0.8" g="0.8" b="0.8" showDaughters="true" visible="true" />
+        <vis name="TpcFiducialVis" alpha="0" r="0.2" g="1.0" b="1.0" showDaughters="true" visible="true" />
     </display>
 
     <!-- General dimensions -->
@@ -42,14 +48,24 @@
         <constant name="fiducial_z" value="50*cm/2" />
     </define>
 
-    <!-- Subdetectors -->
+    <!-- Calorimeter Variates -->
     <include ref="CZT.xml" />
-    <!-- <include ref="TPC.xml" /> -->
+    <!-- <include ref="CZT_mono.xml" /> -->
+    <!-- <include ref="CZT_side.xml" /> -->
+    <!-- <include ref="CZT_layer.xml" /> -->
+
+    <!-- TPC -->
+    <include ref="TPC.xml" />
 
     <!-- Passive components -->
-    <!-- <include ref="Vessel.xml" /> -->
+    <include ref="Passives.xml" />
+    <!-- <include ref="Passives_simple.xml" /> -->
+    <!-- <include ref="Passives_test.xml" /> -->
 
-    <!-- Electric field of the field cage (TBD) -->
+    <!-- Placeholder for auxiliary detectors  -->
+    <!-- <include ref="Auxiliary.xml" /> -->
+
+    <!-- Placeholder for electric field of the field cage -->
     <!-- <fields>
        <field type="solenoid" name="GlobalSolenoid" inner_field="3.5*tesla"
 	     outer_field="-1.5*tesla" zmax="SolenoidCoilOuterZ"
