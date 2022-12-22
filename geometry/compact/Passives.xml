@@ -6,7 +6,7 @@
             <envelope name="Passives" material="TPC_gas" type="Assembly" />
 
             <volume name="Vessel" vis="VesselVis" material="stainless_steel">
-                <shape name="Vessel_Solid" type="CAD_Shape" ref="vessel.stl" unit="mm"/>
+                <shape name="Vessel_Solid" type="CAD_Shape" ref="../cad_model/vessel.stl" unit="mm"/>
             </volume>
             <physvol volume="Vessel">
                 <position x="0" y="0" z="0" />
