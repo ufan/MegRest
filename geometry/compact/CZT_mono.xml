@@ -31,7 +31,7 @@
 
 
     <detectors>
-        <detector id="2" name="Calorimeter" type="DD4hep_VolumeAssembly" sensitive="calorimeter" readout="CztHits">
+        <detector id="2" name="Calorimeter" type="Megat_MonoAssembly" sensitive="calorimeter" readout="CztHits">
             <envelope name="Calorimeter" material="TPC_gas" type="Assembly" />
 
             <!-- Open Block -->
@@ -51,6 +51,7 @@
     <!-- Readout/Segmentation/HitCollection Configuration-->
     <readouts>
         <readout name="CztHits">
+            <segmentation type="NoSegmentation"/>
             <id>system:6</id>
         </readout>
     </readouts>

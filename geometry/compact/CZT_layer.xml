@@ -37,8 +37,8 @@
     </define>
 
     <detectors>
-        <detector id="2" name="Calorimeter" type="Megat_PlanarAssembly" readout="CztHits"
-                  region="Czt_Region" limits="Czt_LimitSet">
+        <detector id="2" name="Calorimeter" type="Megat_PlanarAssembly" readout="CztHits">
+            <!-- region="Czt_Region" limits="Czt_LimitSet"> -->
             <!-- in TPC gas -->
             <material name="TPC_gas" comment="Default fill material"/>
 
@@ -103,8 +103,10 @@
     <!-- Readout/Segmentation/HitCollection Configuration-->
     <readouts>
         <readout name="CztHits">
-            <segmentation type="CartesianGridXY" grid_size_x="Czt_Pitch_X" grid_size_y="Czt_Pitch_Y" offset_x="-Czt_X/2-Czt_Pitch_X/2" offset_y="-Czt_X/2-Czt_Pitch_Y/2" />
-            <id>system:6,section:6,layer:4,row:8,column:8,x:32:16,y:16</id>
+            <!-- <segmentation type="CartesianGridXY" grid_size_x="Czt_Pitch_X" grid_size_y="Czt_Pitch_Y" offset_x="-Czt_X/2-Czt_Pitch_X/2" offset_y="-Czt_X/2-Czt_Pitch_Y/2" /> -->
+            <segmentation type="NoSegmentation"/>
+            <!-- <id>system:6,section:6,layer:4,row:8,column:8,x:32:16,y:16</id> -->
+            <id>system:6,section:6,layer:4,row:8,column:8</id>
         </readout>
     </readouts>
 </lccdd>

@@ -41,8 +41,7 @@
 
 
     <detectors>
-        <detector id="1" name="Tracker" type="DD4hep_VolumeAssembly" readout="TpcHits"
-                  sensitive="tracker" region="Tpc_Region" limits="Tpc_LimitSet">
+        <detector id="1" name="Tracker" type="Megat_MonoAssembly" readout="TpcHits" sensitive="tracker">
             <!-- // envelope assembly -->
             <envelope name="Tracker" material="TPC_gas" type="Assembly" />
 
