@@ -4,19 +4,21 @@
     <limits>
         <limitset name="Tpc_LimitSet">
             <limit name="step_length_max" particles="*" value="5.0" unit="mm" />
-            <limit name="track_length_max" particles="*" value="5.0" unit="mm" />
-            <limit name="time_max" particles="*" value="5.0" unit="ns" />
-            <limit name="ekin_min" particles="*" value="0.01" unit="MeV" />
-            <limit name="range_min" particles="*" value="1.0" unit="mm" />
-            <cut particles="e+" value="2.0" unit="mm" />
-            <cut particles="e-" value="2.0" unit="mm" />
-            <cut particles="gamma" value="5.0" unit="mm" />
+            <!-- <limit name="track_length_max" particles="*" value="5.0" unit="mm" /> -->
+            <!-- <limit name="time_max" particles="*" value="5.0" unit="ns" /> -->
+            <!-- <limit name="ekin_min" particles="*" value="0.01" unit="MeV" /> -->
+            <limit name="range_min" particles="*" value="5.0" unit="mm" />
+            <!-- <cut particles="e+" value="2.0" unit="mm" />
+                 <cut particles="e-" value="2.0" unit="mm" />
+                 <cut particles="gamma" value="5.0" unit="mm" /> -->
         </limitset>
     </limits>
 
     <!-- Region  -->
     <regions>
-        <region name="Tpc_Region" eunit="MeV" lunit="mm" cut="0.001" threshold="0.001">
+        <!-- <region name="Tpc_Region" eunit="MeV" lunit="mm" cut="500" threshold="0.6"> -->
+        <region name="Tpc_Region" lunit="mm" cut="0.1">
+            <!-- <region name="Tpc_Region" eunit="MeV" threshold="0.6"> -->
             <limitsetref name="Tpc_LimitSet" />
         </region>
     </regions>
@@ -41,7 +43,9 @@
 
 
     <detectors>
-        <detector id="1" name="Tracker" type="Megat_MonoAssembly" readout="TpcHits" sensitive="tracker">
+        <detector id="1" name="Tracker" type="Megat_MonoAssembly" readout="TpcHits" sensitive="tracker"
+                  limits="Tpc_LimitSet">
+            <!-- region="Tpc_Region"> -->
             <!-- // envelope assembly -->
             <envelope name="Tracker" material="TPC_gas" type="Assembly" />
 
