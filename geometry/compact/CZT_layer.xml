@@ -2,7 +2,7 @@
 <lccdd>
     <!-- Region  -->
     <regions>
-        <region name="Calo_Region" eunit="MeV" lunit="mm" cut="0.1"/>
+        <region name="Calo_Region" eunit="MeV" lunit="mm" cut="0.001"/>
     </regions>
 
     <!-- Dimensions -->
