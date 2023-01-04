@@ -50,7 +50,7 @@
 
             <!-- Each section matches one side of the detector -->
             <!-- Bottom (-Z) Side -->
-            <section id="1" name="Bottom">
+            <section id="0" name="Bottom">
                 <position x="0" y="0" z="-(fiducial_z+Czt_Layer_Offset+Czt_Layer_ExtraOffset)" />
                 <layer module="Module" repeat="Czt_Layer_N"  gap="Czt_Layer_Gap">
                     <row nmodules="Czt_Module_Nx" gap="Czt_Module_Gap" />
@@ -59,7 +59,7 @@
             </section>
 
             <!-- +Y Side -->
-            <section id="2" name="Ypos" gap="Czt_Layer_Gap">
+            <section id="1" name="Ypos" gap="Czt_Layer_Gap">
                 <position x="0" y="fiducial_z+Czt_Layer_Offset+Czt_Layer_ExtraOffset" z="0" />
                 <rotation x="pi/2*rad" y="0" z="0" />
                 <layer module="Module" repeat="Czt_Layer_N">
@@ -69,7 +69,7 @@
             </section>
 
             <!-- +X Side -->
-            <section id="3" name="Xpos">
+            <section id="2" name="Xpos">
                 <position x="fiducial_z+Czt_Layer_Offset+Czt_Layer_ExtraOffset" y="0" z="0" />
                 <rotation x="0" y="-pi/2*rad" z="-pi/2*rad" />
                 <layer module="Module" repeat="Czt_Layer_N"  gap="Czt_Layer_Gap">
@@ -79,7 +79,7 @@
             </section>
 
             <!-- -Y Side -->
-            <section id="4" name="Yneg">
+            <section id="3" name="Yneg">
                 <position x="0" y="-(fiducial_z+Czt_Layer_Offset+Czt_Layer_ExtraOffset)" z="0" />
                 <rotation x="-pi/2*rad" y="0" z="-pi*rad" />
                 <layer module="Module" repeat="Czt_Layer_N"  gap="Czt_Layer_Gap">
@@ -89,7 +89,7 @@
             </section>
 
             <!-- -X Side -->
-            <section id="5" name="Xneg">
+            <section id="4" name="Xneg">
                 <position x="-(fiducial_z+Czt_Layer_Offset+Czt_Layer_ExtraOffset)" y="0" z="0" />
                 <rotation x="0" y="pi/2*rad" z="pi/2*rad" />
                 <layer module="Module" repeat="Czt_Layer_N"  gap="Czt_Layer_Gap">
@@ -103,7 +103,7 @@
     <!-- Readout/Segmentation/HitCollection Configuration-->
     <readouts>
         <readout name="CztHits">
-            <segmentation type="CartesianGridXY" grid_size_x="Czt_Pitch_X" grid_size_y="Czt_Pitch_Y" offset_x="-Czt_Crystal_X/2-Czt_Pitch_X/2" offset_y="-Czt_Crystal_Y/2-Czt_Pitch_Y/2" />
+            <segmentation type="CartesianGridXY" grid_size_x="Czt_Pitch_X" grid_size_y="Czt_Pitch_Y" offset_x="-Czt_Crystal_X/2+Czt_Pitch_X/2" offset_y="-Czt_Crystal_Y/2+Czt_Pitch_Y/2" />
             <id>system:6,section:6,layer:6,row:32:8,column:8,x:8,y:8</id>
         </readout>
     </readouts>

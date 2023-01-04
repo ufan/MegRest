@@ -34,7 +34,7 @@
 
             <!-- Each section matches one side of the detector -->
             <!-- Bottom (-Z) Side -->
-            <section id="1" name="Bottom" gap="Czt_Layer_Gap">
+            <section id="0" name="Bottom" gap="Czt_Layer_Gap">
                 <position x="0" y="0" z="-Czt_Z/2" />
                 <layer module="Module" repeat="Czt_Layer_N">
                     <row nmodules="1"/>
@@ -43,7 +43,7 @@
             </section>
 
             <!-- +Y Side -->
-            <section id="2" name="Ypos" gap="Czt_Layer_Gap">
+            <section id="1" name="Ypos" gap="Czt_Layer_Gap">
                 <position x="0" y="Czt_Z/2" z="0" />
                 <rotation x="pi/2*rad" y="0" z="0" />
                 <layer module="Module" repeat="Czt_Layer_N">
@@ -53,7 +53,7 @@
             </section>
 
             <!-- +X Side -->
-            <section id="3" name="Xpos" gap="Czt_Layer_Gap">
+            <section id="2" name="Xpos" gap="Czt_Layer_Gap">
                 <position x="Czt_Z/2" y="0" z="0" />
                 <rotation x="0" y="-pi/2*rad" z="-pi/2*rad" />
                 <layer module="Module" repeat="Czt_Layer_N">
@@ -63,7 +63,7 @@
             </section>
 
             <!-- -Y Side -->
-            <section id="4" name="Yneg" gap="Czt_Layer_Gap">
+            <section id="3" name="Yneg" gap="Czt_Layer_Gap">
                 <position x="0" y="-Czt_Z/2" z="0" />
                 <rotation x="-pi/2*rad" y="0" z="-pi*rad" />
                 <layer module="Module" repeat="Czt_Layer_N">
@@ -73,7 +73,7 @@
             </section>
 
             <!-- -X Side -->
-            <section id="5" name="Xneg" gap="Czt_Layer_Gap">
+            <section id="4" name="Xneg" gap="Czt_Layer_Gap">
                 <position x="-Czt_Z/2" y="0" z="0" />
                 <rotation x="0" y="pi/2*rad" z="pi/2*rad" />
                 <layer module="Module" repeat="Czt_Layer_N">
@@ -87,7 +87,7 @@
     <!-- Readout/Segmentation/HitCollection Configuration-->
     <readouts>
         <readout name="CztHits">
-            <!-- <segmentation type="CartesianGridXY" grid_size_x="Czt_Pitch_X" grid_size_y="Czt_Pitch_Y" offset_x="-Czt_X/2-Czt_Pitch_X/2" offset_y="-Czt_X/2-Czt_Pitch_Y/2" /> -->
+            <!-- <segmentation type="CartesianGridXY" grid_size_x="Czt_Pitch_X" grid_size_y="Czt_Pitch_Y" offset_x="-Czt_X/2+Czt_Pitch_X/2" offset_y="-Czt_Y/2+Czt_Pitch_Y/2" /> -->
             <segmentation type="NoSegmentation"/>
             <!-- <id>system:6,section:6,layer:4,row:8,column:8,x:32:16,y:16</id> -->
             <id>system:6,section:6,layer:4,row:8,column:8</id>

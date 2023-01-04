@@ -29,7 +29,7 @@
 
             <!-- Each section matches one side of the detector -->
             <!-- Bottom (-Z) Side -->
-            <section id="1" name="Bottom">
+            <section id="0" name="Bottom">
                 <position x="0" y="0" z="-Czt_Z/2" />
                 <layer module="Module">
                     <row nmodules="1"/>
@@ -38,7 +38,7 @@
             </section>
 
             <!-- +Y Side -->
-            <section id="2" name="Ypos">
+            <section id="1" name="Ypos">
                 <position x="0" y="Czt_Z/2" z="0" />
                 <rotation x="pi/2*rad" y="0" z="0" />
                 <layer module="Module">
@@ -48,7 +48,7 @@
             </section>
 
             <!-- +X Side -->
-            <section id="3" name="Xpos">
+            <section id="2" name="Xpos">
                 <position x="Czt_Z/2" y="0" z="0" />
                 <rotation x="0" y="-pi/2*rad" z="-pi/2*rad" />
                 <layer module="Module">
@@ -58,7 +58,7 @@
             </section>
 
             <!-- -Y Side -->
-            <section id="4" name="Yneg">
+            <section id="3" name="Yneg">
                 <position x="0" y="-Czt_Z/2" z="0" />
                 <rotation x="-pi/2*rad" y="0" z="-pi*rad" />
                 <layer module="Module">
@@ -68,7 +68,7 @@
             </section>
 
             <!-- -X Side -->
-            <section id="5" name="Xneg">
+            <section id="4" name="Xneg">
                 <position x="-Czt_Z/2" y="0" z="0" />
                 <rotation x="0" y="pi/2*rad" z="pi/2*rad" />
                 <layer module="Module">
